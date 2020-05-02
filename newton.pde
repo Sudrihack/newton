@@ -1,6 +1,7 @@
 class Newton {
   int nbr = 100;
-  float G = 6.67430*pow(10, -11);
+  //float G = 6.67430*pow(10, -11);
+  float G = 1*pow(10,-4);
   float[] posx = new float[nbr], posy= new float[nbr], masse= new float[nbr], force_subie = new float[nbr];
 
   Newton() {
@@ -13,10 +14,7 @@ class Newton {
   }
 
   void force(int i, int n) {
-    force_subie[n] = G * masse[i] * masse[n]/pow((distance(i, n)+0.1), 2);
-    //print(force_subie[n]);
-    //print(distance(i,n));
-    //print('\n');
+    force_subie[n] = atan2(posy[n]-posy[i],posx[n]-posx[i]) * G * masse[i] * masse[n]/pow((distance(i, n)+0.1), 2);
   }
   float distance(int i, int n) {
     float distance = sqrt(pow(posx[n]-posx[i], 2)+pow(posy[n]-posy[i], 2));
@@ -27,11 +25,11 @@ class Newton {
     for (int n =0; n<nbr; n++) {
       force(i, n);
     }
-    float somme = sum(force_subie);
-    return somme/masse[i];
+    return sum(force_subie)/masse[i];
   }
   float vitesse(int i) {
-    float dx = acceleration(i)*0.1;
+    float dx = acceleration(i)*0.01;
+    //int s = int(random(-2,2));
     return dx;
   }
   float sum(float[] T) {
