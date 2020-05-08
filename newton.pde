@@ -1,25 +1,26 @@
 class Newton {
   int nbr = 1000;
-  float G = 6.67430*pow(10, -11);
-  //float G = 1*pow(10,-5);
+  //float G = 6.67430*pow(10, -11); //utiliser cette constante si on met un soleil
+  float G = 1*pow(10, -3);
   float[] masse= new float[nbr+1], force_subie = new float[nbr+1];
   color[] c = new color[nbr+1];
   Vector[] planet = new Vector[nbr+1];
 
   Newton() { //constructeur 
-    for (int i = 0; i<nbr; i++) {
+    for (int i = 0; i<nbr; i++) { 
       float x=random(100, 1200);
 
       float y=random(100, 800);
-      
-      
+
+
       masse[i] = random(1000000, 1000000000);
-      c[i] = color(int(masse[i]), int(masse[i]), int(masse[i]));
+      c[i] = color(int(masse[i])%255, int(masse[i])%255, int(masse[i])%255);
 
       Vector p = new Vector(0, 0, x, y, masse[i], c[i]);
       planet[i] = p;
     }
-    
+    //DECOMMENTER CES LIGNES POUR METTRE UN SOLEIL (VOIR AUSSI PLUS BAS DANS LA METHODE DESSINER)
+    /*
     float x=700;
 
     float y=500;
@@ -28,6 +29,7 @@ class Newton {
 
     Vector p = new Vector(0, 0, x, y, masse[int(nbr)], c[int(nbr)]);
     planet[int(nbr)] = p;
+    */
   }
   float angle(int n, int i) {
 
@@ -47,7 +49,7 @@ class Newton {
   }
   float acceleration(int i) {
     //on calcule toutes les forces
-    for (int n =0; n<=nbr; n++) {
+    for (int n =0; n<nbr; n++) {
       force(i, n);
     }
     return sum(force_subie)/masse[i];
@@ -65,35 +67,22 @@ class Newton {
     return somme;
   }
   void bouger() {
-    for (int i =0; i<=nbr; i++) {
+    for (int i =0; i<nbr; i++) {
       planet[i].chang_dx(vitesse(i));
       planet[i].bouger();
-      /*for(int n =0; i<=nbr; i++){
-       if(posx[i] == posx[n] && posy[i] == posy[n] && n!= i){
-                                                                      /*print('n');
-       fusion(i, n);
-       }
-       }*/
     }
     dessiner();
   }
-  /*
-  void fusion(int i, int n) {
-   float masse_tot = masse[i]+masse[n];
-   posx[i] = 0;
-   posy[i] = 0;
-   masse[i] = 0;
-   
-   masse[n] = masse_tot;
-   }*/
   void dessiner() {
-    //rect(500,500,100,100);
     background(0);
     for (int i=0; i<nbr; i++) {
       planet[i].dessiner();
     }
+    //DECOMMENTER CES LIGNES POUR FAIRE APPARAITRE UN SOLEIL
+    /*
     fill(planet[nbr].c);
-    ellipse(planet[nbr].x, planet[nbr].y, 50,50);
+    ellipse(planet[nbr].x, planet[nbr].y, 50, 50);
+    */
   }
 }
 
@@ -104,8 +93,4 @@ void setup() {
 Newton galaxie = new Newton();
 void draw() {
   galaxie.bouger();
-  /*
-  print("\n");
-   print(galaxie.planet[5].x);*/
-  //galaxie.dessiner();
 }

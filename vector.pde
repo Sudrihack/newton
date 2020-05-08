@@ -12,7 +12,7 @@ class Vector {
 
   void dessiner() {
     //background(0);
-    colorMode(HSB, 600);
+    colorMode(RGB, 255);
     fill(c);
     noStroke();
     ellipse(x, y, m/100000000, m/100000000);
