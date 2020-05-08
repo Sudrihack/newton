@@ -1,18 +1,21 @@
 class Vector {
-  float dx, agl, x, y;
-  Vector(float vitesse, float angle, float posx, float posy) {
+  float dx, agl, x, y, m;
+  color c;
+  Vector(float vitesse, float angle, float posx, float posy, float masse, color couleur) {
     dx = vitesse;
     agl = angle;
     x = posx;
     y = posy;
+    m = masse;
+    c = couleur;
   }
 
   void dessiner() {
     //background(0);
     colorMode(HSB, 600);
-    fill(color(agl, agl, agl));
+    fill(c);
     noStroke();
-    ellipse(x, y, 10, 10);
+    ellipse(x, y, m%10, m%10);
   }
 
   void bouger() {

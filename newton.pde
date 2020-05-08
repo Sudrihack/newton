@@ -8,14 +8,24 @@ class Newton {
 
   Newton() { //constructeur 
     for (int i = 0; i<nbr; i++) {
-      float x=random(200, 800);
+      float x=random(100, 1200);
 
-      float y=random(200, 700);
-      Vector p = new Vector(0, 0, x, y);
-      planet[i] = p;
+      float y=random(100, 800);
       masse[i] = random(1, 100)*10;
       c[i] = color(int(masse[i])%255, int(masse[i])%255, int(masse[i])%255);
+
+      Vector p = new Vector(0, 0, x, y, masse[i], c[i]);
+      planet[i] = p;
     }
+    /*
+    float x=random(100, 1200);
+
+    float y=random(100, 800);
+    masse[int(nbr/2)] = 10000;
+    c[int(nbr/2)] = color(255, 0, 0);
+
+    Vector p = new Vector(0, 0, x, y, masse[int(nbr/2)], c[int(nbr/2)]);
+    planet[int(nbr/2)] = p;*/
   }
   float angle(int n, int i) {
 
@@ -58,7 +68,7 @@ class Newton {
       planet[i].bouger();
       /*for(int n =0; i<=nbr; i++){
        if(posx[i] == posx[n] && posy[i] == posy[n] && n!= i){
-                                  /*print('n');
+                                                                      /*print('n');
        fusion(i, n);
        }
        }*/
@@ -79,7 +89,6 @@ class Newton {
     background(255);
     fill(255);
     for (int i=0; i<nbr-1; i++) {
-      fill(c[i]);
       planet[i].dessiner();
     }
   }
