@@ -15,7 +15,7 @@ class Vector {
     colorMode(HSB, 600);
     fill(c);
     noStroke();
-    ellipse(x, y, m%10, m%10);
+    ellipse(x, y, m/100000000, m/100000000);
   }
 
   void bouger() {

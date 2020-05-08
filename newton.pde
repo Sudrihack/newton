@@ -1,7 +1,7 @@
 class Newton {
   int nbr = 1000;
-  //float G = 6.67430*pow(10, -11);
-  float G = 1*pow(10, 3);
+  float G = 6.67430*pow(10, -11);
+  //float G = 1*pow(10,-5);
   float[] masse= new float[nbr+1], force_subie = new float[nbr+1];
   color[] c = new color[nbr+1];
   Vector[] planet = new Vector[nbr+1];
@@ -11,21 +11,23 @@ class Newton {
       float x=random(100, 1200);
 
       float y=random(100, 800);
-      masse[i] = random(1, 100)*10;
-      c[i] = color(int(masse[i])%255, int(masse[i])%255, int(masse[i])%255);
+      
+      
+      masse[i] = random(1000000, 1000000000);
+      c[i] = color(int(masse[i]), int(masse[i]), int(masse[i]));
 
       Vector p = new Vector(0, 0, x, y, masse[i], c[i]);
       planet[i] = p;
     }
-    /*
-    float x=random(100, 1200);
+    
+    float x=700;
 
-    float y=random(100, 800);
-    masse[int(nbr/2)] = 10000;
-    c[int(nbr/2)] = color(255, 0, 0);
+    float y=500;
+    masse[int(nbr)] = 1000000000000000000L;
+    c[int(nbr)] = color(255, 0, 0);
 
-    Vector p = new Vector(0, 0, x, y, masse[int(nbr/2)], c[int(nbr/2)]);
-    planet[int(nbr/2)] = p;*/
+    Vector p = new Vector(0, 0, x, y, masse[int(nbr)], c[int(nbr)]);
+    planet[int(nbr)] = p;
   }
   float angle(int n, int i) {
 
@@ -45,7 +47,7 @@ class Newton {
   }
   float acceleration(int i) {
     //on calcule toutes les forces
-    for (int n =0; n<nbr; n++) {
+    for (int n =0; n<=nbr; n++) {
       force(i, n);
     }
     return sum(force_subie)/masse[i];
@@ -63,7 +65,7 @@ class Newton {
     return somme;
   }
   void bouger() {
-    for (int i =0; i<nbr; i++) {
+    for (int i =0; i<=nbr; i++) {
       planet[i].chang_dx(vitesse(i));
       planet[i].bouger();
       /*for(int n =0; i<=nbr; i++){
@@ -86,11 +88,12 @@ class Newton {
    }*/
   void dessiner() {
     //rect(500,500,100,100);
-    background(255);
-    fill(255);
-    for (int i=0; i<nbr-1; i++) {
+    background(0);
+    for (int i=0; i<nbr; i++) {
       planet[i].dessiner();
     }
+    fill(planet[nbr].c);
+    ellipse(planet[nbr].x, planet[nbr].y, 50,50);
   }
 }
 
